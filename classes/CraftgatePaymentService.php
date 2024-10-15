@@ -44,14 +44,15 @@ class CraftgatePaymentService
         if ($this->retrieveCraftgatePayment($checkoutToken))
             return;
 
+
         $checkoutFormResult = self::craftgateClient()->retrieveCheckoutFormResult($checkoutToken);
-        $checkoutFormResult->$checkoutToken = $checkoutToken;
+        $checkoutFormResult->checkoutToken = $checkoutToken;
 
         $cartId = $checkoutFormResult->conversationId;
         $cart = new Cart($cartId);
         $customer = new Customer($cart->id_customer);
 
-        if (!$this->checkIfContextIsValid($cart, $customer) && !isset($checkoutFormResult->paymentError) && $checkoutFormResult->paymentStatus === 'SUCCESS') {
+        if ($this->checkIfContextIsValid($cart, $customer) && !isset($checkoutFormResult->paymentError) && $checkoutFormResult->paymentStatus === 'SUCCESS') {
             $this->createOrder($cart, $customer, $checkoutFormResult);
         }
     }

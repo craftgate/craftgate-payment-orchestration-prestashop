@@ -94,6 +94,13 @@
                     <p class="help-block">{l s='Example: hideFooter=true&hideHeader=true' mod='craftgate_payment_orchestration'}</p>
                 </div>
             </div>
+            <div class="form-group">
+                <label class="control-label col-lg-3">{l s='Webhook URL' mod='craftgate_payment_orchestration'}</label>
+                <div class="col-lg-9">
+                    <input disabled type="text" name="CRAFTGATE_IFRAME_OPTIONS" value="{$CRAFTGATE_WEBHOOK_URL|escape:'html':'UTF-8'}">
+                    <p class="help-block">{l s='The URL that payment results will be sent to on the server-side. You should enter this webhook address to Craftgate Merchant Panel to get webhook request.' mod='craftgate_payment_orchestration'}</p>
+                </div>
+            </div>
 
             <div class="panel-footer">
                 <button type="submit" value="1" id="module_form_submit_btn" name="submitCraftgateModuleConfiguration" class="btn btn-default pull-right">

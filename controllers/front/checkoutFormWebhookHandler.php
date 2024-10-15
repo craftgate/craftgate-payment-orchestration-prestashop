@@ -22,7 +22,8 @@ class Craftgate_Payment_OrchestrationCheckoutFormWebhookHandlerModuleFrontContro
         }
 
         try {
-            $this->craftgatePaymentService->handleCheckoutPaymentWebhookResult($webhook_data["token"]);
+            $this->craftgatePaymentService->handleCheckoutPaymentWebhookResult($webhook_data["payloadId"]);
+            exit();
         } catch (Exception $e) {
             Tools::displayError($e);
             PrestaShopLogger::addLog("Unexpected error occurred while creating order" . serialize($e));

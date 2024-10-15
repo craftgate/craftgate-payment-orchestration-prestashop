@@ -221,7 +221,7 @@ class Craftgate_Payment_Orchestration extends PaymentModule
 
     private function updateDefaultConfigurations(): bool
     {
-        $webhookUrl = $this->context->link->getModuleLink($this->name, 'checkoutFormWebhook', [], true);
+        $webhookUrl = $this->context->link->getModuleLink($this->name, 'checkoutFormWebhookHandler', [], true);
         return Configuration::updateGlobalValue(Craftgate_Payment_Orchestration::CONFIG_IS_ONE_PAGE_CHECKOUT_ACTIVE, true)
             && Configuration::updateGlobalValue(Craftgate_Payment_Orchestration::CONFIG_WEBHOOK_URL, $webhookUrl);
     }

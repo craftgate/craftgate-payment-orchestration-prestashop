@@ -18,9 +18,9 @@ class Craftgate_Payment_OrchestrationCheckoutFormCallbackHandlerModuleFrontContr
     {
         $checkoutToken = Tools::getValue("token");
 
-        if (!isset($checkoutToken)) {
+        if (!$checkoutToken) {
             Tools::displayError("Error occurred");
-            return;
+            exit();
         }
 
         if (Tools::getValue('source') != 'prestashop') {
