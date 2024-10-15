@@ -28,12 +28,14 @@ $_MODULE['<{craftgate_payment_orchestration}prestashop>configure_f5bc7ee15452cb2
 $_MODULE['<{craftgate_payment_orchestration}prestashop>configure_0763bcfe13fb05503dada612e8990fe4'] = 'Opciones de Iframe';
 $_MODULE['<{craftgate_payment_orchestration}prestashop>configure_9dc258f2243861d1cf2bea3629675138'] = 'Ejemplo: hideFooter=true&hideHeader=true';
 $_MODULE['<{craftgate_payment_orchestration}prestashop>configure_c9cc8cce247e49bae79f15173ce97354'] = 'Guardar';
-$_MODULE['<{craftgate_payment_orchestration}prestashop>displayadminordermainbottom_1e63d1811556fc2dad106dcbd4217a69'] = 'ID de Pago';
-$_MODULE['<{craftgate_payment_orchestration}prestashop>displayadminordermainbottom_f8510606e25047908d1f3e4633145576'] = 'ID de Pedido de Craftgate';
-$_MODULE['<{craftgate_payment_orchestration}prestashop>displayadminordermainbottom_f97a7b6286078d057df359177e532b72'] = 'Precio Pagado';
+$_MODULE['<{craftgate_payment_orchestration}prestashop>displayadminordermainbottom_accea76d09b0193c332cf51c646a205c'] = 'Detalles del Pago';
+$_MODULE['<{craftgate_payment_orchestration}prestashop>displayadminordermainbottom_1e63d1811556fc2dad106dcbd4217a69'] = 'ID del Pago';
+$_MODULE['<{craftgate_payment_orchestration}prestashop>displayadminordermainbottom_f8510606e25047908d1f3e4633145576'] = 'ID del Pedido de Craftgate';
+$_MODULE['<{craftgate_payment_orchestration}prestashop>displayadminordermainbottom_f97a7b6286078d057df359177e532b72'] = 'Importe del Pago';
 $_MODULE['<{craftgate_payment_orchestration}prestashop>displayadminordermainbottom_459f93c30d7bc374abe95e0d8a1c66b0'] = 'Cuota';
 $_MODULE['<{craftgate_payment_orchestration}prestashop>displayadminordermainbottom_ab05c71727b84389efacb94cfe65a299'] = 'Cuota de Cuota';
-$_MODULE['<{craftgate_payment_orchestration}prestashop>displayadminordermainbottom_eb8abdd76e82b300cba4096d4c120122'] = 'URL de Detalles de Pago';
+$_MODULE['<{craftgate_payment_orchestration}prestashop>displayadminordermainbottom_eb8abdd76e82b300cba4096d4c120122'] = 'URL de los Detalles del Pago';
 $_MODULE['<{craftgate_payment_orchestration}prestashop>embeddedcheckoutformbinary_a128f329c5aeea633ced6bb9d7c56c74'] = 'Realizar Pedido';
+$_MODULE['<{craftgate_payment_orchestration}prestashop>adminconfigurecraftgatepaymentorchestrationcontroller_edfe300ca312067edea71abb9770e302'] = 'Módulo de Orquestación de Pagos Craftgate';
 $_MODULE['<{craftgate_payment_orchestration}prestashop>adminconfigurecraftgatepaymentorchestrationcontroller_8dd2f915acf4ec98006d11c9a4b0945b'] = 'Ajustes actualizados correctamente.';
 $_MODULE['<{craftgate_payment_orchestration}prestashop>craftgatepaymentservice_ab05c71727b84389efacb94cfe65a299'] = 'Cuota de Cuota';

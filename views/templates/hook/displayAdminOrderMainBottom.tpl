@@ -8,7 +8,7 @@
         </div>
         <div class="card-body">
             <div class="payment-details">
-                <h3>Payment Details</h3>
+                <h3>{l s='Payment Details' mod='craftgate_payment_orchestration'}</h3>
                 <p><strong>{l s='Payment ID' mod='craftgate_payment_orchestration'}:</strong> {$craftgatePayment->payment_id}</p>
                 <p><strong>{l s='Craftgate Order ID' mod='craftgate_payment_orchestration'}:</strong> {$craftgatePayment->getMetaData()->orderId}</p>
                 <p><strong>{l s='Paid Price' mod='craftgate_payment_orchestration'}
