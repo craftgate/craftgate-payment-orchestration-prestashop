@@ -46,7 +46,7 @@ class Craftgate_Payment_Orchestration extends PaymentModule
     {
         $this->name = 'craftgate_payment_orchestration';
         $this->tab = 'payments_gateways';
-        $this->version = '1.0.0';
+        $this->version = '1.1.0';
         $this->author = 'Craftgate';
         $this->currencies = true;
         $this->currencies_mode = 'checkbox';
