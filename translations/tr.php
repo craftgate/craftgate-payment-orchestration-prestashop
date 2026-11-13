@@ -37,4 +37,5 @@ $_MODULE['<{craftgate_payment_orchestration}prestashop>displayadminordermainbott
 $_MODULE['<{craftgate_payment_orchestration}prestashop>displayadminordermainbottom_eb8abdd76e82b300cba4096d4c120122'] = 'Ödeme Detay Sayfası';
 $_MODULE['<{craftgate_payment_orchestration}prestashop>embeddedcheckoutformbinary_a128f329c5aeea633ced6bb9d7c56c74'] = 'Sipariş Oluştur';
 $_MODULE['<{craftgate_payment_orchestration}prestashop>adminconfigurecraftgatepaymentorchestrationcontroller_8dd2f915acf4ec98006d11c9a4b0945b'] = 'Ayarlar başarılı bir şekilde güncellendi.';
-$_MODULE['<{craftgate_payment_orchestration}prestashop>craftgatepaymentservice_ab05c71727b84389efacb94cfe65a299'] = 'Taksit Vade Farkı ';
+$_MODULE['<{craftgate_payment_orchestration}prestashop>craftgatepaymentservice_ab05c71727b84389efacb94cfe65a299'] = 'Taksit Vade Farkı';
+$_MODULE['<{craftgate_payment_orchestration}prestashop>craftgatepaymentservice_440034be449239e73f787984c43c32de'] = 'Ödeme tamamlanamadı. Lütfen tekrar deneyin.';

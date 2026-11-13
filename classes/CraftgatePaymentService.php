@@ -4,7 +4,7 @@ use classes\CraftgatePayment;
 
 class CraftgatePaymentService
 {
-    const INSTALLMENT_FEE_COOKIE_NAME = "installmentFee";
+    private static ?float $pendingInstallmentFee = null;
     private PaymentModule $module;
 
     public function __construct($module)
@@ -33,9 +33,20 @@ class CraftgatePaymentService
         }
 
         if (!isset($checkoutFormResult->paymentError) && $checkoutFormResult->paymentStatus === 'SUCCESS') {
-            $this->createOrder($cart, $customer, $checkoutFormResult);
+            try {
+                $this->createOrder($cart, $customer, $checkoutFormResult);
+            } catch (Exception $e) {
+                // The webhook may have created the order for this cart in the meantime.
+                if (!$cart->orderExists()) {
+                    throw $e;
+                }
+                PrestaShopLogger::addLog("Order already exists for cart " . $cart->id . ", skipping order creation. Error: " . $e->getMessage(), 2);
+            }
         } else {
-            throw new CraftgatePaymentErrorException($checkoutFormResult->paymentError->errorDescription);
+            throw new CraftgatePaymentErrorException(
+                $checkoutFormResult->paymentError->errorDescription
+                ?? $this->module->l('Payment could not be completed. Please try again.', 'CraftgatePaymentService')
+            );
         }
     }
 
@@ -59,13 +70,9 @@ class CraftgatePaymentService
 
     private function createOrder(Cart $cart, Customer $customer, $checkoutFormResult): void
     {
-        Context::getContext()->cookie->__unset(self::INSTALLMENT_FEE_COOKIE_NAME);
-        Context::getContext()->cookie->write();
-
-        if ($checkoutFormResult->installment > 1) {
-            Context::getContext()->cookie->__set(self::INSTALLMENT_FEE_COOKIE_NAME, $checkoutFormResult->paidPrice - $checkoutFormResult->price);
-            Context::getContext()->cookie->write();
-        }
+        self::$pendingInstallmentFee = $checkoutFormResult->installment > 1
+            ? $checkoutFormResult->paidPrice - $checkoutFormResult->price
+            : null;
 
         $this->module->validateOrder(
             (int)$cart->id,
@@ -98,19 +105,16 @@ class CraftgatePaymentService
 
     public function addInstallmentFee(Order $order): void
     {
-        $installmentFee = Context::getContext()->cookie->__get(self::INSTALLMENT_FEE_COOKIE_NAME);
-        if (!$installmentFee) {
+        $installmentFee = self::$pendingInstallmentFee;
+        if (!$installmentFee || $order->module !== $this->module->name) {
             return;
         }
 
-        Context::getContext()->cookie->__unset(self::INSTALLMENT_FEE_COOKIE_NAME);
-        Context::getContext()->cookie->write();
-
-        $installmentFee = (float)$installmentFee;
+        self::$pendingInstallmentFee = null;
 
         $orderDetail = new OrderDetail();
         $orderDetail->id_order = $order->id;
-        $orderDetail->product_name = $this->module->l('Installment Fee');
+        $orderDetail->product_name = $this->module->l('Installment Fee', 'CraftgatePaymentService');
         $orderDetail->product_quantity = 1;
         $orderDetail->product_price = $installmentFee;
         $orderDetail->unit_price_tax_excl = $installmentFee;

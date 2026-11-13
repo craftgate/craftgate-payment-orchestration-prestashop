@@ -69,8 +69,8 @@
 <script>
     const message = {
         type: 'PRESTASHOP_CHECKOUT_COMPLETED', value: {
-            token: '{$checkoutToken}',
-            cartId: '{$cartId}'
+            token: '{$checkoutToken|escape:'javascript':'UTF-8'}',
+            cartId: '{$cartId|escape:'javascript':'UTF-8'}'
         }
     }
     window.parent.postMessage(message, '*')

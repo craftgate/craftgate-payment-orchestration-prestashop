@@ -44,7 +44,7 @@ class AdminConfigureCraftgatePaymentOrchestrationController extends ModuleAdminC
             Configuration::updateValue(Craftgate_Payment_Orchestration::CONFIG_IS_SANDBOX_ACTIVE, Tools::getValue('CRAFTGATE_IS_SANDBOX_ACTIVE'));
             Configuration::updateValue(Craftgate_Payment_Orchestration::CONFIG_IFRAME_OPTIONS, Tools::getValue('CRAFTGATE_IFRAME_OPTIONS'));
 
-            $this->confirmations[] = $this->l('Settings updated successfully.');
+            $this->confirmations[] = $this->module->l('Settings updated successfully.', 'AdminConfigureCraftgatePaymentOrchestrationController');
         }
 
         return parent::postProcess();

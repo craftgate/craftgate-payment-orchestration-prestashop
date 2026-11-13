@@ -26,7 +26,7 @@ class Craftgate_Payment_OrchestrationCheckoutFormWebhookHandlerModuleFrontContro
             exit();
         } catch (Exception $e) {
             Tools::displayError($e);
-            PrestaShopLogger::addLog("Unexpected error occurred while creating order" . serialize($e));
+            PrestaShopLogger::addLog("Unexpected error occurred while creating order. " . get_class($e) . ": " . $e->getMessage());
         }
     }
 

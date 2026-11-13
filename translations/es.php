@@ -39,3 +39,4 @@ $_MODULE['<{craftgate_payment_orchestration}prestashop>embeddedcheckoutformbinar
 $_MODULE['<{craftgate_payment_orchestration}prestashop>adminconfigurecraftgatepaymentorchestrationcontroller_edfe300ca312067edea71abb9770e302'] = 'Módulo de Orquestación de Pagos Craftgate';
 $_MODULE['<{craftgate_payment_orchestration}prestashop>adminconfigurecraftgatepaymentorchestrationcontroller_8dd2f915acf4ec98006d11c9a4b0945b'] = 'Ajustes actualizados correctamente.';
 $_MODULE['<{craftgate_payment_orchestration}prestashop>craftgatepaymentservice_ab05c71727b84389efacb94cfe65a299'] = 'Cuota de Cuota';
+$_MODULE['<{craftgate_payment_orchestration}prestashop>craftgatepaymentservice_440034be449239e73f787984c43c32de'] = 'No se pudo completar el pago. Por favor, inténtelo de nuevo.';

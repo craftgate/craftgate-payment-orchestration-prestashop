@@ -37,3 +37,4 @@ $_MODULE['<{craftgate_payment_orchestration}prestashop>displayadminordermainbott
 $_MODULE['<{craftgate_payment_orchestration}prestashop>embeddedcheckoutformbinary_a128f329c5aeea633ced6bb9d7c56c74'] = 'Place Order';
 $_MODULE['<{craftgate_payment_orchestration}prestashop>adminconfigurecraftgatepaymentorchestrationcontroller_8dd2f915acf4ec98006d11c9a4b0945b'] = 'Settings updated successfully.';
 $_MODULE['<{craftgate_payment_orchestration}prestashop>craftgatepaymentservice_ab05c71727b84389efacb94cfe65a299'] = 'Installment Fee';
+$_MODULE['<{craftgate_payment_orchestration}prestashop>craftgatepaymentservice_440034be449239e73f787984c43c32de'] = 'Payment could not be completed. Please try again.';
