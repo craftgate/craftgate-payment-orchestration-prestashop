@@ -13,7 +13,7 @@
 
             var iframeWin = document.querySelector("#craftgate-one-page-checkout-form-iframe-container iframe").contentWindow;
             iframeWin.postMessage({
-                type: 'CRAFTGATE_SUBMIT_MASTERPASS_FORM'
+                type: 'CRAFTGATE_SUBMIT_FORM'
             }, '*')
         });
     };

@@ -77,44 +77,23 @@ class Craftgate_Payment_OrchestrationCheckoutFormModuleFrontController extends M
     private function buildInitCheckoutFormRequest(): array
     {
         $cartId = $this->context->cart->id;
-        $orderTotal = $this->context->cart->getOrderTotal();
+        $orderTotal = CraftgateUtil::format_price($this->context->cart->getOrderTotal());
 
         return [
-            'price' => CraftgateUtil::format_price($orderTotal),
-            'paidPrice' => CraftgateUtil::format_price($orderTotal),
+            'price' => $orderTotal,
+            'paidPrice' => $orderTotal,
             'currency' => $this->context->currency->iso_code,
             'paymentGroup' => \Craftgate\Model\PaymentGroup::LISTING_OR_SUBSCRIPTION,
             'conversationId' => $cartId,
             'callbackUrl' => $this->context->link->getModuleLink($this->module->name, 'checkoutFormCallbackHandler', ['cartId' => $cartId], true),
-            'items' => $this->buildItems($this->context->cart)
+            'items' => [
+                [
+                    'externalId' => $cartId,
+                    'name' => 'Cart #' . $cartId,
+                    'price' => $orderTotal,
+                ],
+            ],
         ];
-    }
-
-    private function buildItems($cart)
-    {
-        $cart_products = $cart->getProducts();
-        $items = [];
-
-        if ($cart_products) {
-            foreach ($cart_products as $product) {
-                $items[] = [
-                    'externalId' => $product['id_product'],
-                    'name' => $product['name'],
-                    'price' => CraftgateUtil::format_price($product['total_wt']),
-                ];
-            }
-        }
-
-        $shipping_cost = (float)$cart->getOrderTotal(true, Cart::ONLY_SHIPPING);
-        if ($shipping_cost > 0) {
-            $items[] = [
-                'externalId' => 'shipping-total',
-                'name' => 'Shipping Total',
-                'price' => CraftgateUtil::format_price($shipping_cost),
-            ];
-        }
-
-        return $items;
     }
 
     private function checkIfContextIsValid()

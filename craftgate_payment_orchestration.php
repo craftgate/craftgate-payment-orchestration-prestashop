@@ -56,9 +56,9 @@ class Craftgate_Payment_Orchestration extends PaymentModule
         ];
 
         $this->controllers = [
-            'cancel',
-            'external',
-            'validation',
+            'checkoutForm',
+            'checkoutFormCallbackHandler',
+            'checkoutFormWebhookHandler',
         ];
 
         parent::__construct();
@@ -78,8 +78,27 @@ class Craftgate_Payment_Orchestration extends PaymentModule
 
     public function uninstall(): bool
     {
-        return parent::uninstall()
-            && Configuration::deleteByName(static::CONFIG_IS_MODULE_ENABLED);
+        if (!parent::uninstall()) {
+            return false;
+        }
+
+        foreach ([
+            static::CONFIG_IS_MODULE_ENABLED,
+            static::CONFIG_PAYMENT_OPTION_TITLE,
+            static::CONFIG_PAYMENT_OPTION_DESCRIPTION,
+            static::CONFIG_LIVE_API_KEY,
+            static::CONFIG_LIVE_SECRET_KEY,
+            static::CONFIG_SANDBOX_API_KEY,
+            static::CONFIG_SANDBOX_SECRET_KEY,
+            static::CONFIG_IS_SANDBOX_ACTIVE,
+            static::CONFIG_IFRAME_OPTIONS,
+            static::CONFIG_WEBHOOK_URL,
+            static::CONFIG_IS_ONE_PAGE_CHECKOUT_ACTIVE,
+        ] as $configKey) {
+            Configuration::deleteByName($configKey);
+        }
+
+        return true;
     }
 
     public function getContent(): void
@@ -122,7 +141,7 @@ class Craftgate_Payment_Orchestration extends PaymentModule
 
         $cart = $params['cart'];
 
-        if (false === Validate::isLoadedObject($cart) || false === $this->isCurrencySupported($cart) || false === Configuration::get(static::CONFIG_IS_ONE_PAGE_CHECKOUT_ACTIVE)) {
+        if (false === Validate::isLoadedObject($cart) || false === $this->isCurrencySupported($cart) || !Configuration::get(static::CONFIG_IS_ONE_PAGE_CHECKOUT_ACTIVE)) {
             return '';
         }
 
@@ -148,6 +167,9 @@ class Craftgate_Payment_Orchestration extends PaymentModule
         }
 
         $craftgatePayment = CraftgatePayment::getByOrderId($orderId);
+        if (!$craftgatePayment) {
+            return '';
+        }
 
         $this->context->smarty->assign([
             'currency' => $order->id_currency,

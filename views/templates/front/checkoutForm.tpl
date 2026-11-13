@@ -5,7 +5,7 @@
             <p class="alert alert-danger">
                 {$error|escape:'htmlall':'UTF-8'}
             </p>
-        <section
+        </section>
     {else}
         <section id="craftgate-checkout-form" class="card card-block mb-2">
             <div id="craftgate-checkout-form-iframe-container">
@@ -37,6 +37,11 @@
             }
 
             window.addEventListener("message", function (event) {
+                const iframe = document.querySelector('#craftgate-checkout-form-iframe-container iframe');
+                if (!iframe || event.source !== iframe.contentWindow) {
+                    return;
+                }
+
                 const {type, value} = event.data;
                 if (type === 'HEIGHT_CHANGED') {
                     document.getElementById('craftgate-checkout-form-iframe-container').style.height = value + 'px';

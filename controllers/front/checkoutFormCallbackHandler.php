@@ -47,7 +47,7 @@ class Craftgate_Payment_OrchestrationCheckoutFormCallbackHandlerModuleFrontContr
             PrestaShopLogger::addLog("Payment error occurred while creating order for cart $cartId" . $e->getMessage(), 2);
             $this->redirectOrderCheckout($e->getMessage());
         } catch (Exception $e) {
-            PrestaShopLogger::addLog("Unknown error occurred while creating order" . serialize($e), 3);
+            PrestaShopLogger::addLog("Unknown error occurred while creating order for cart $cartId. " . get_class($e) . ": " . $e->getMessage(), 3);
             $this->redirectOrderCheckout();
         }
 
@@ -72,7 +72,7 @@ class Craftgate_Payment_OrchestrationCheckoutFormCallbackHandlerModuleFrontContr
             [
                 'id_cart' => (int)$cart->id,
                 'id_module' => (int)$this->module->id,
-                'id_order' => (int)$this->module->currentOrder,
+                'id_order' => (int)($this->module->currentOrder ?: Order::getIdByCartId((int)$cart->id)),
                 'key' => $customer->secure_key,
             ]
         );

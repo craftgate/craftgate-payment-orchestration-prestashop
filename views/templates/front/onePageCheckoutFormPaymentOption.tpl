@@ -74,6 +74,11 @@
     }
 
     window.addEventListener("message", function (event) {
+        const iframe = checkoutFormContainer.querySelector("iframe");
+        if (!iframe || event.source !== iframe.contentWindow) {
+            return;
+        }
+
         const {type, value} = event.data;
         if (type === 'HEIGHT_CHANGED') {
             checkoutFormContainer.style.height = value + 'px';
